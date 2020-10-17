@@ -11,13 +11,10 @@
                     <label for="">Subtitle Journal</label>
                     <input type="text" class="form-control" wire:model='journal_subtitle'>
                 </div>
-
-                <div wire:ignore>
-                    <div class="form-group">
-                        <label for="">Abstrack</label>
-                        <textarea wire:model='abstract' >
-                        </textarea>
-                    </div>
+                <div class="form-group" wire:ignore>
+                    <label for="">Abstrack</label>
+                    <textarea wire:model='abstract' id="abstract">
+                    </textarea>
                 </div>
 
                 <div class="form-group">
@@ -42,24 +39,32 @@
 @section('css')
 
 @endsection
-@section('js')
+@push('scripts')
 <script src="https://cdn.tiny.cloud/1/3kubek8r1p1mz4kvit7hc1z2mxd8wgg551cbeu82qkmenprf/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+<script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+<script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/jquery.tinymce.min.js" referrerpolicy="origin"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 <script>
-    tinymce.init({
-      selector: 'textarea',
+    var abstract = $('#abstract').tinymce({
       plugins: 'advlist autolink lists link image charmap print preview hr anchor pagebreak',
       toolbar_mode: 'floating',
-      height: 500
+      height: 500,
+      setup: function(editor){
+          editor.on('blur', function(e){
+              @this.set('abstract', tinymce.activeEditor.getContent())
+          })
+      }
     });
-</script>
 
+</script>
 <script>
-    Livewire.on('success', params => {
+    Livewire.on('success', function(){
         Swal.fire(
-            params['title'],
-            params['message'],
-            params['type']
+            'Good job!',
+            'You clicked the button!',
+            'success'
         )
+        @this.set('abstract', tinymce.activeEditor.setContent(''))
     })
 </script>
-@endsection
+@endpush

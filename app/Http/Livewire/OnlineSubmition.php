@@ -9,15 +9,6 @@ class OnlineSubmition extends Component
 {
     public $journal_title, $journal_subtitle, $abstract, $type, $keyword;
 
-    protected $listeners = [
-        'abstract' => 'getAbstract'
-    ];
-
-    public function getAbstract($abstract)
-    {
-        dd($abstract);
-    }
-
     public function rules()
     {
         return [
