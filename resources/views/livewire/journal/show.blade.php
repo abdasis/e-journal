@@ -1,3 +1,7 @@
 <div>
-    {{-- Close your eyes. Count to one. That is how long forever feels. --}}
+    {{ $journal->journal_title }}
+
+<br>
+     <button wire:click='download' class="btn btn-danger btn-sm"><i class="mdi mdi-file-pdf"></i></button>
+
 </div>

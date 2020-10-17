@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Livewire\Auth\Register;
+use App\Http\Livewire\Issues;
+use App\Http\Livewire\Journal\Show;
 use App\Http\Livewire\OnlineSubmition;
 use App\Http\Livewire\Welcome;
 use Illuminate\Support\Facades\Route;
@@ -19,6 +21,8 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', Welcome::class)->name('index');
 Route::get('daftar', Register::class)->name('daftar');
 Route::get('online-submition', OnlineSubmition::class)->name('submition');
+Route::get('issues', Issues::class)->name('issue');
+Route::get('article/{slug}', Show::class)->name('journal.show');
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');
 })->name('dashboard');

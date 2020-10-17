@@ -1,4 +1,5 @@
 <div>
+    <div class="alert alert-info">Silahkan login / register terlebih dahulu untuk mengupload jurnal terbaru anda</div>
     <div class="card shadow-md">
         <div class="card-body">
             <form wire:submit.prevent='store'>
@@ -28,11 +29,57 @@
                 </div>
 
                 <div class="form-group">
+                    <label for="">File Journal</label>
+                    <input type="file" class="form-control" wire:model='file_journal'>
+                </div>
+
+                <div class="form-group">
                     <button class="btn btn-success">Submit Sekarang</button>
                 </div>
             </form>
         </div>
     </div>
+    @auth
+    <div class="card shadow-md">
+        <div class="card-body">
+            <form wire:submit.prevent='store'>
+                <div class="form-group">
+                    <label for="">Title Jurnal</label>
+                    <input type="text" class="form-control" wire:model='journal_title'>
+                </div>
+
+                <div class="form-group">
+                    <label for="">Subtitle Journal</label>
+                    <input type="text" class="form-control" wire:model='journal_subtitle'>
+                </div>
+                <div class="form-group" wire:ignore>
+                    <label for="">Abstrack</label>
+                    <textarea wire:model='abstract' id="abstract">
+                    </textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="">Type</label>
+                    <input type="text" class="form-control" wire:model='type'>
+                </div>
+
+                <div class="form-group">
+                    <label for="">Keyword</label>
+                    <input type="text" class="form-control" wire:model='keyword'>
+                </div>
+
+                <div class="form-group">
+                    <label for="">File Journal</label>
+                    <input type="file" class="form-control" wire:model='file_journal'>
+                </div>
+
+                <div class="form-group">
+                    <button class="btn btn-success">Submit Sekarang</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    @endauth
 </div>
 
 
@@ -60,8 +107,8 @@
 <script>
     Livewire.on('success', function(){
         Swal.fire(
-            'Good job!',
-            'You clicked the button!',
+            'Selamat!',
+            'Journal yang anda submit sudah kami terima, berikan kami waktu untuk menerbitkan journal anda!',
             'success'
         )
         @this.set('abstract', tinymce.activeEditor.setContent(''))
